@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+    <!-- Binding com arroba diz que tá apssando uma elemtno textual
+    VOcê não consegue mexer no atributo
+    Modificar model! <, deixa o valor que você escolheu. = Bidirecional
+    -->
+    <head>
+        <meta charset='utf-8'>
+        <title> Fundamentos de Angular</title>
+        <script type='text/javascript' src='node_modules/angular/angular.min.js'></script>
+        <script type="text/javascript">
+            angular.module('app', [])
+            angular.module('app').component('field',{
+                bindings:{
+                    id: '@',
+                    label: '@',
+                    model: '='
+                    
+                },
+                template: ` 
+                <label for="{{$ctrl.id }}"> {{ $ctrl.labe}}</label>
+                <input id="{{$ctrl.id}}" ng-model='$ctrl.model'>
+                `
+            })
+            angular.module('app').controller('MeuController', function(){
+                const self = this
+                self.name = "Anônimo"
+            })
+        </script>
+    </head>
+    <body>
+        <div ng-controller="MeuController as ctrl">
+        <h1>{{ctrl.name}}</h1>
+        <field id= "nome" label="Nome" model="ctrl.name"></field>
+        </div>
+    </body>
+</html>
